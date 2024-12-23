@@ -20,8 +20,19 @@ st.write("The name on your Smoothie will be:", name_on_order)
 #st.write("You selected:", option)
 
 
+# secrets.toml is not needed
+cnx = st.connection(
+    "snowflake",
+    url = "snowflake://yuvrajsflakeaws@IDGXCRN.QYB12453/",
+    connect_args = dict(
+        authenticator = "externalbrowser",
+        warehouse = "COMPUTE_WH",
+        role = "SYSADMIN",
+    )
+)
+# ...
 
-cnx = st.connection("snowflake")
+#cnx = st.connection("snowflake")
 session = cnx.session()
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
